@@ -1,0 +1,25 @@
+
+
+<div class="flex gap-2 align-items-center">
+    <span>Filter By: </span>
+
+    @for (filter of appliedFilters; track $index) {
+        @if( filter.enabled ){
+            <div class="flex gap-2 align-items-center">
+                <p-multiSelect selecteditemslabel="{0} items selected" [virtualScroll]="true" [virtualScrollItemSize]="30" [options]="filter.options" [formControl]="filter.fc" optionLabel="label" [style]="{'width': '400px'}"></p-multiSelect>
+                <i (click)="popEntityFilter()" class="pi pi-trash trash-icon"></i>
+            </div>
+        } @else {
+            <span>{{filter.propertyFilter}} ({{filter.fc.value.length}} selected)</span>
+        }
+    }
+
+    <div (click)="menu.toggle($event)">
+        <i class="pi pi-plus-circle add-icon"></i>
+    </div>
+
+</div>
+
+
+
+<p-menu #menu [model]="menuItems" [popup]="true" appendTo="body"></p-menu>
